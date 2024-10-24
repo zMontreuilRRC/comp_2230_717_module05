@@ -1,6 +1,5 @@
 let isValid = true;
 const dataContainerNode = document.querySelector("#data-container");
-
 const buttonNode = document.querySelector("button");
 
 // Promises receive a callback function argument (aka. "Executor")
