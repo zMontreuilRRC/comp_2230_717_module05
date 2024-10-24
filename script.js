@@ -18,7 +18,7 @@ async function makeRequest(endpoint) {
     // resolves when the response is received
     try {
         const response = await fetch(endpoint);
-        
+
         // boolean for response code in 200s rang
         if(!response.ok) {
             // new keyword means an object is being instantiated
@@ -44,13 +44,25 @@ async function listCountries() {
     //iterate over all country objects
     // append to ul
     countries.forEach(country => {
-        console.log(country);
-        const countryName = country["name"]["official"];
+        // manually extract values into variables
+        // const countryName = country["name"]["official"];
+        // const countryPop = country["population"];
+
+        // object destructuring
+        // shorthand way of extracting values from objects
+        const {
+            population,
+            name: {
+                official
+            }
+        } = country;
 
         const newLiNode = document.createElement("li");
-        newLiNode.textContent = countryName;
+        newLiNode.textContent = `${official}, Population: ${new Intl.NumberFormat().format(population)}`;
         countryUlNode.appendChild(newLiNode);
     });
 }
 
-listCountries();
+document.querySelector("#get-countries-button").addEventListener("click", function() {
+    listCountries();
+})
